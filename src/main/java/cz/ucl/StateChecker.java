@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 public class StateChecker implements IStateChecker {
 
     @Override
-    public void checkWinner() {
-
+    public String checkWinner() {
+        return "";
     }
 }

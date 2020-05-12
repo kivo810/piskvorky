@@ -20,7 +20,7 @@ public class GameBoardService {
         return gameBoard.getField(x, y);
     }
 
-    public void setField(int x, int y){
-        gameBoard.setField(x,y);
+    public void setField(int x, int y, char a){
+        gameBoard.setField(x,y,a);
     }
 }

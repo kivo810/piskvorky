@@ -12,20 +12,28 @@ public class WebController {
     @Autowired
     GameBoardService gameBoardService;
 
+    @Autowired
+    StateChecker stateChecker;
+
+    @Autowired
+    RandomEngine randomEngine;
+
     @GetMapping(value = "/")
     public ResponseEntity<Object> printGame(){
         return ResponseEntity.status(HttpStatus.OK).body(gameBoardService.getGame());
     }
 
-    @PostMapping(value = "/{x}&{y}")
-    public ResponseEntity<Object> playerPlay(@PathVariable int x, @PathVariable int y){
-        if (gameBoardService.getField(x,y) == '-'){
-            gameBoardService.setField(x, y);
+    @PostMapping(value = "/{x}")
+    public ResponseEntity<Object> playerPlay(@PathVariable int x){
+        int xy[] = randomEngine.parsingToGB(x);
+        if(gameBoardService.getField(xy[0],xy[1]) == '-'){
+            gameBoardService.setField(xy[0],xy[1],'X');
             return ResponseEntity.status(HttpStatus.OK).body(gameBoardService.getGame());
         }
         else {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(gameBoardService.getGame());
         }
+
     }
 
     @DeleteMapping(value = "/")

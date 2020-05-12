@@ -1,5 +1,6 @@
 package cz.ucl;
 
 public interface ITIcTacToeEngine {
-    void cpuPlay();
+    int[] parsingToGB(int x);
+    int cpuPlay();
 }

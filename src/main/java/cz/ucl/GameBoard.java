@@ -26,8 +26,8 @@ public class GameBoard {
         return board[x][y];
     }
 
-    public void setField(int x, int y){
-        board[x][y] = 'X';
+    public void setField(int x, int y, char a){
+        board[x][y] = a;
     }
 
     public void printBoard(){
