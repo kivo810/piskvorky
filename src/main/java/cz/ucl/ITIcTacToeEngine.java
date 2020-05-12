@@ -1,6 +1,8 @@
 package cz.ucl;
 
+import org.springframework.http.ResponseEntity;
+
 public interface ITIcTacToeEngine {
-    int[] parsingToGB(int x);
-    int cpuPlay();
+    ResponseEntity<Object> playerMove(int x);
+    ResponseEntity<Object> cpuMove();
 }

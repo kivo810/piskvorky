@@ -20,6 +20,10 @@ public class GameBoardService {
         return gameBoard.getField(x, y);
     }
 
+    public int getMoves(){
+        return gameBoard.getMoves();
+    }
+
     public void setField(int x, int y, char a){
         gameBoard.setField(x,y,a);
     }

@@ -7,15 +7,21 @@ import javax.annotation.PostConstruct;
 @Component
 public class GameBoard {
     private char board [][];
+    private int moves;
 
     @PostConstruct
     public void initBoard() {
+        moves = 0;
         board = new char[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 board[i][j] = '-';
             }
         }
+    }
+
+    public int getMoves(){
+        return moves;
     }
 
     public char[][] getBoard() {
@@ -28,6 +34,7 @@ public class GameBoard {
 
     public void setField(int x, int y, char a){
         board[x][y] = a;
+        moves = moves + 1;
     }
 
     public void printBoard(){

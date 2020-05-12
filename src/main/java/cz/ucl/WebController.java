@@ -25,15 +25,12 @@ public class WebController {
 
     @PostMapping(value = "/{x}")
     public ResponseEntity<Object> playerPlay(@PathVariable int x){
-        int xy[] = randomEngine.parsingToGB(x);
-        if(gameBoardService.getField(xy[0],xy[1]) == '-'){
-            gameBoardService.setField(xy[0],xy[1],'X');
-            return ResponseEntity.status(HttpStatus.OK).body(gameBoardService.getGame());
+        ResponseEntity<Object> playerResult = randomEngine.playerMove(x);
+        if (gameBoardService.getMoves() == 9){
+            refreshGame();
         }
-        else {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(gameBoardService.getGame());
-        }
-
+        ResponseEntity<Object> cpuResult = randomEngine.cpuMove();
+        return cpuResult;
     }
 
     @DeleteMapping(value = "/")
