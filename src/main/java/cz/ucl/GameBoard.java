@@ -16,8 +16,6 @@ public class GameBoard {
                 board[i][j] = '-';
             }
         }
-        printBoard();
-
     }
 
     public char[][] getBoard() {
@@ -28,6 +26,10 @@ public class GameBoard {
         return board[x][y];
     }
 
+    public void setField(int x, int y){
+        board[x][y] = 'X';
+    }
+
     public void printBoard(){
         for (int i = 0; i < 3; i++) {
             String doska = "|";
@@ -36,6 +38,10 @@ public class GameBoard {
             }
             System.out.println(doska);
         }
+    }
+
+    public void refreshBoard(){
+        initBoard();
     }
 
 }

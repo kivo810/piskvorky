@@ -1,10 +1,10 @@
 package cz.ucl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RandomEngine implements ITIcTacToeEngine {
-    @Autowired
-    GameBoard gameBoard;
 
     @Override
     public void cpuPlay() {
