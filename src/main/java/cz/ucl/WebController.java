@@ -25,9 +25,16 @@ public class WebController {
 
     @PostMapping(value = "/{x}")
     public ResponseEntity<Object> playerPlay(@PathVariable int x){
+        if (x < 1 || x > 9) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("You are out of bounds!");
+        }
         ResponseEntity<Object> playerResult = randomEngine.playerMove(x);
+        if (playerResult.getStatusCode().equals(HttpStatus.CONFLICT)){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("This field is not empty!");
+        }
         if (gameBoardService.getMoves() == 9){
-            refreshGame();
+            gameBoardService.refreshGame();
+            return ResponseEntity.status(HttpStatus.OK).body("ITS A DRAW");
         }
         ResponseEntity<Object> cpuResult = randomEngine.cpuMove();
         return cpuResult;
