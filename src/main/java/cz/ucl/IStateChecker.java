@@ -1,5 +1,5 @@
 package cz.ucl;
 
 public interface IStateChecker {
-    String checkWinner();
+    boolean checkWinner(GameBoard gameBoard, char x);
 }

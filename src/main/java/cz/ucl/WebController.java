@@ -24,7 +24,7 @@ public class WebController {
     }
 
     @PostMapping(value = "/{x}")
-    public ResponseEntity<Object> playerPlay(@PathVariable int x){
+    public ResponseEntity<Object> playGame(@PathVariable int x){
         if (x < 1 || x > 9) {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("You are out of bounds!");
         }
@@ -32,11 +32,19 @@ public class WebController {
         if (playerResult.getStatusCode().equals(HttpStatus.CONFLICT)){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("This field is not empty!");
         }
+        if (stateChecker.checkWinner(gameBoardService.gameBoard, 'X')){
+            gameBoardService.refreshGame();
+            return ResponseEntity.status(HttpStatus.OK).body("Player WINS!!!");
+        }
         if (gameBoardService.getMoves() == 9){
             gameBoardService.refreshGame();
             return ResponseEntity.status(HttpStatus.OK).body("ITS A DRAW");
         }
         ResponseEntity<Object> cpuResult = randomEngine.cpuMove();
+        if (stateChecker.checkWinner(gameBoardService.gameBoard,'O')){
+            gameBoardService.refreshGame();
+            return ResponseEntity.status(HttpStatus.OK).body("CPU WINS!!");
+        }
         return cpuResult;
     }
 
