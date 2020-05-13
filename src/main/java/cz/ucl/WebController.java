@@ -26,11 +26,11 @@ public class WebController {
     @PostMapping(value = "/{x}")
     public ResponseEntity<Object> playGame(@PathVariable int x){
         if (x < 1 || x > 9) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("You are out of bounds!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You are out of bounds!");
         }
         ResponseEntity<Object> playerResult = randomEngine.playerMove(x);
         if (playerResult.getStatusCode().equals(HttpStatus.CONFLICT)){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("This field is not empty!");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("This field is not empty!");
         }
         if (stateChecker.checkWinner(gameBoardService.gameBoard, 'X')){
             gameBoardService.refreshGame();
